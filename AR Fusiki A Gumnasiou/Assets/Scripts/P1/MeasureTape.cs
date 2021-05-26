@@ -5,9 +5,9 @@ using TMPro;
 
 public class MeasureTape : MonoBehaviour
 {
+    [SerializeField] GameObject tapeBody;//xriazete gia na dw an einai active to MeshRenderer, diladi an to blepei i kamera
     [SerializeField] GameObject tapePart;
     [SerializeField] GameObject startTapePart;
-    [SerializeField] GameObject tapeBody;
     [SerializeField] GameObject tapeEdge;
     [SerializeField] Transform edgePoint;
 
@@ -15,7 +15,7 @@ public class MeasureTape : MonoBehaviour
     [SerializeField] Transform textPivot;
 
     [SerializeField] float tapePartScaleOffset;
-    float distance;
+    [SerializeField] float distance;
 
     public void Update()
     {
@@ -30,8 +30,8 @@ public class MeasureTape : MonoBehaviour
 
     void GetDistance()
     {
-        Vector2 edgePosition = new Vector2(tapeEdge.transform.position.x, tapeEdge.transform.position.y);
-        Vector2 startPosition = new Vector2(startTapePart.transform.position.x, startTapePart.transform.position.y);
+        Vector2 edgePosition = new Vector2(tapeEdge.transform.position.x, tapeEdge.transform.position.z);
+        Vector2 startPosition = new Vector2(startTapePart.transform.position.x, startTapePart.transform.position.z);
 
         distance = (edgePosition - startPosition).magnitude;
         //distance = (distance-0.15f) * 100;
@@ -44,8 +44,17 @@ public class MeasureTape : MonoBehaviour
 
     void TextLookAtCamera()
     {
-        Vector3 textPos = Camera.main.WorldToScreenPoint(textPivot.position);
-        distanceText.transform.position = textPos;
+        if(tapeBody.GetComponent<MeshRenderer>().enabled)
+        {
+            Vector3 textPos = Camera.main.WorldToScreenPoint(textPivot.position);
+            distanceText.gameObject.SetActive(true);
+            distanceText.transform.position = textPos;
+        }
+        else
+        {
+            distanceText.gameObject.SetActive(false);
+        }
+        
     }
 
     void ScaleMeasure(float newDistance)

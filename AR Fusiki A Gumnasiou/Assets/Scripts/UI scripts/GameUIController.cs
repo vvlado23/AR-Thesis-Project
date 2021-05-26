@@ -23,4 +23,20 @@ public class GameUIController : MonoBehaviour
     {
         SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
+
+    public void ManageHelpPanel(GameObject helpPanel)
+    {
+        bool isActive = helpPanel.activeSelf;
+        if(!isActive)
+        {
+            Screen.orientation = ScreenOrientation.Portrait;//Sets the screen to be portret
+        }
+        else
+        {
+            Screen.orientation = ScreenOrientation.AutoRotation;//Sets the screen to be portret or landscape automaticly
+
+        }
+        helpPanel.SetActive(!isActive);
+    }
+
 }

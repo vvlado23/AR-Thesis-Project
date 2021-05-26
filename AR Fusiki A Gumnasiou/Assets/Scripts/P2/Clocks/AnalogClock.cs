@@ -7,9 +7,6 @@ public class AnalogClock : DigitalClock
     [SerializeField] Transform minutesPointer;
     [SerializeField] Transform secondsPointer;
 
-    int newSeconds = 0;
-    int newMinutes = 0;
-
     protected override void Start()
     {
         base.Start();
@@ -17,15 +14,8 @@ public class AnalogClock : DigitalClock
 
     protected override void CountTime()
     {
-        CalculateRotations();
+        CalculateMinSec();
         RotatePointers();
-    }
-
-    void CalculateRotations()
-    {
-        newSeconds = seconds % 60;
-        newMinutes = seconds / 60;
-        Debug.Log(newMinutes + " : " + newSeconds);
     }
 
     void RotatePointers()

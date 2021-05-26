@@ -11,6 +11,8 @@ public class DigitalClock : MonoBehaviour
 
     protected float time = 0f;
     protected int seconds = 0;
+    protected int newSeconds = 0;
+    protected int newMinutes = 0;
     protected int milliseconds = 0;
 
     protected virtual void Start()
@@ -20,8 +22,6 @@ public class DigitalClock : MonoBehaviour
 
     void Update()
     {
-
-
         if(!timeStoped)
         {
             time += Time.deltaTime;
@@ -34,6 +34,7 @@ public class DigitalClock : MonoBehaviour
 
     public void ResetTime()
     {
+        time = 0;
         seconds = 0;
         milliseconds = 0;
         CountTime();
@@ -47,11 +48,19 @@ public class DigitalClock : MonoBehaviour
 
     public void StartTime()
     {
+        ResetTime();
         timeStoped = false;
     }
 
     protected virtual void CountTime()
     {
-        timeText.text = seconds + " : " + milliseconds;
+        CalculateMinSec();
+        timeText.text = newMinutes + " : " + newSeconds + " : " + milliseconds;
+    }
+
+    protected void CalculateMinSec()
+    {
+        newSeconds = seconds % 60;
+        newMinutes = seconds / 60;
     }
 }

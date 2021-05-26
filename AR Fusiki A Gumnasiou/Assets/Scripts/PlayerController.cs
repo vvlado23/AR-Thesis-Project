@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask whatIsInteractable;
     [SerializeField] Transform holdingPosition;
 
+    [Header("DEBUG")]
     public Vector3 vel = new Vector3();
     public bool isHolding = false;
 
@@ -32,19 +34,28 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
         {
+            if(CheckIfTouchUI()) { return; }
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, whatIsInteractable))
             {
-                //TryMove(hit);
                 TryInteract(hit);
             }
         }
     }
 
-    void TryMove(Vector3 hit)
+    bool CheckIfTouchUI()
     {
-        myAgent.SetDestination(hit);
+        foreach (Touch touch in Input.touches)
+        {
+            int id = touch.fingerId;
+            if (EventSystem.current.IsPointerOverGameObject(id))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void TryInteract(RaycastHit hit)
@@ -56,10 +67,18 @@ public class PlayerController : MonoBehaviour
         }else if(hit.transform.CompareTag("Ground"))
         {
             TryMove(hit.point);
+        }else if(hit.transform.CompareTag("Pick up"))
+        {
+            TryMove(hit.point);
         }
     }
 
-    void PickUpItem(Transform item)
+    void TryMove(Vector3 hit)
+    {
+        myAgent.SetDestination(hit);
+    }
+
+    public void PickUpItem(Transform item)
     {
         if (holdingPosition.childCount > 0)
         {
@@ -71,21 +90,32 @@ public class PlayerController : MonoBehaviour
         isHolding = true;
     }
 
-    GameObject PutDownItem()
+    public void PutDownButton()
+    {
+        if (holdingPosition.childCount == 0)
+            return;
+        Vector3 newPosition = holdingPosition.transform.position;
+        PutDownItem(transform.parent, newPosition);
+    }
+
+    public GameObject PutDownItem(Transform newTransform, Vector3 newPosition)
     {
         if(holdingPosition.childCount==0)
         {
             return null;
         }
         isHolding = false;
-        return holdingPosition.transform.GetChild(0).gameObject;
+        GameObject item = holdingPosition.transform.GetChild(0).gameObject;
+        item.transform.SetParent(newTransform);
+        item.transform.position = newPosition;
+        return item;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Interactable"))
+        if (other.gameObject.CompareTag("Pick up"))
         {
             PickUpItem(other.transform);
-        } 
+        }
     }
 }
