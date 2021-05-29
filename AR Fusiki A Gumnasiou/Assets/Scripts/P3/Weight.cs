@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Weight : MonoBehaviour
 {
-    [Tooltip("min:0 max:0.1")] public float itemWeight;
+    [Tooltip("Grammars")] public float itemWeight;
 }

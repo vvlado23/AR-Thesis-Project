@@ -40,7 +40,7 @@ public class ScaleInteraction : MonoBehaviour
                     if (plateItems[i])
                     {
                         myScale.AddWeight(plateItems[i].itemWeight * -itemOffset);//me to -itemOffset aferw baros
-                        pController.PickUpItem(plateItems[i].gameObject.transform.GetChild(0));//to PickUpItem pernei to parent tou object, diladi to holder
+                        pController.PickUpItem(plateItems[i].gameObject.transform);
                         plateItems[i] = null;
                         break;
                     }

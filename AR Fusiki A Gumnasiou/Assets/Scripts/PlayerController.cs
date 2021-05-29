@@ -84,9 +84,9 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        item.parent.SetParent(holdingPosition);
-        item.parent.localPosition = Vector3.zero;
-        item.parent.localRotation = Quaternion.Euler(0, 0, 0);//set rotation and position of item's parent to holdingPosition
+        item.SetParent(holdingPosition);
+        item.localPosition = Vector3.zero;
+        item.localRotation = Quaternion.Euler(0, 0, 0);//set rotation and position of item's parent to holdingPosition
         isHolding = true;
     }
 
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
         PutDownItem(transform.parent, newPosition);
     }
 
-    public GameObject PutDownItem(Transform newTransform, Vector3 newPosition)
+    public GameObject PutDownItem(Transform newParent, Vector3 newPosition)
     {
         if(holdingPosition.childCount==0)
         {
@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
         }
         isHolding = false;
         GameObject item = holdingPosition.transform.GetChild(0).gameObject;
-        item.transform.SetParent(newTransform);
+        item.transform.SetParent(newParent);
         item.transform.position = newPosition;
         return item;
     }
@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Pick up"))
         {
-            PickUpItem(other.transform);
+            PickUpItem(other.transform.parent);
         }
     }
 }

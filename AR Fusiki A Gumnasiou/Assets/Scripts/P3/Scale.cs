@@ -19,7 +19,15 @@ public class Scale : MonoBehaviour
 
     public void AddWeight(float weight)
     {
-        scaleRotation += weight;
+        scaleRotation += WeightToScaleRotation(weight);
         RotateRod();
+    }
+
+    float WeightToScaleRotation(float weight)
+    {
+        float newScaleRotation;
+        newScaleRotation = weight / 750; //0.4x=300 <=> x=750
+        //300 grammaria einai ta perissotera pou mporei na exei mia pleura
+        return newScaleRotation;
     }
 }
