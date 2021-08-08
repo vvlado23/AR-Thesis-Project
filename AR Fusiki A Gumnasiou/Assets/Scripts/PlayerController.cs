@@ -100,14 +100,24 @@ public class PlayerController : MonoBehaviour
 
     public GameObject PutDownItem(Transform newParent, Vector3 newPosition)
     {
-        if(holdingPosition.childCount==0)
+        GameObject item=GetItemHolding();
+        if (item==null)
         {
             return null;
         }
         isHolding = false;
-        GameObject item = holdingPosition.transform.GetChild(0).gameObject;
         item.transform.SetParent(newParent);
         item.transform.position = newPosition;
+        return item;
+    }
+
+    public GameObject GetItemHolding()
+    {
+        if (holdingPosition.childCount == 0)
+        {
+            return null;
+        }
+        GameObject item = holdingPosition.transform.GetChild(0).gameObject;
         return item;
     }
 

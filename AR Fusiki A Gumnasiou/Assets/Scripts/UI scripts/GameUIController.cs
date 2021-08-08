@@ -39,4 +39,9 @@ public class GameUIController : MonoBehaviour
         helpPanel.SetActive(!isActive);
     }
 
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 }

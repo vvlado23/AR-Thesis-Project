@@ -6,12 +6,14 @@ public class Spring : MonoBehaviour
 {
     [SerializeField] Transform springPivot;
     [SerializeField] Transform itemHolder;
+    [SerializeField] Transform rulerIndex;
 
     public Transform ResetSize()
     {
         springPivot.localScale = new Vector3(1, 1, 1);
         itemHolder.localPosition = Vector3.zero;
-        if(itemHolder.childCount==0)
+        rulerIndex.localPosition = itemHolder.localPosition;
+        if (itemHolder.childCount==0)
         {
             return null;
         }
@@ -25,6 +27,7 @@ public class Spring : MonoBehaviour
     {
         Transform oldItem = ResetSize();
         GameObject myItem = pController.PutDownItem(itemHolder, itemHolder.position);
+        myItem.transform.localRotation = Quaternion.identity;
         Weight itemWeight = myItem.GetComponent<Weight>();
 
         float grammars = itemWeight.itemWeight;
@@ -39,5 +42,6 @@ public class Spring : MonoBehaviour
     {
         springPivot.localScale = new Vector3(1, addSize+1, 1);
         itemHolder.localPosition = new Vector3(0, -addSize*2, 0);
+        rulerIndex.localPosition = itemHolder.localPosition;
     }
 }
