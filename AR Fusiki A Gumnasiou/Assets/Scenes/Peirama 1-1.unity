@@ -380,7 +380,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 768165590}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!21 &769315765
+--- !u!21 &815470891
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -389,7 +389,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: 'QRcode_smallMaterial
 
-    -26644'
+    -1976'
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -763,7 +763,7 @@ PrefabInstance:
     - target: {fileID: 3766971892906230392, guid: 210f4ebad67051a43baf3a976860058b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 769315765}
+      objectReference: {fileID: 815470891}
     - target: {fileID: 3766971892906230394, guid: 210f4ebad67051a43baf3a976860058b, type: 3}
       propertyPath: m_Name
       value: ImageTargetSmall
@@ -845,7 +845,7 @@ MonoBehaviour:
     m_Bits: 0
   speed: 0.2
   isMoving: 0
---- !u!21 &1186324227
+--- !u!21 &1224301660
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -854,7 +854,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: 'QR_bigMaterial
 
-    49942'
+    20872'
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -1225,6 +1225,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1522611503}
     m_Modifications:
+    - target: {fileID: 7566501545335982608, guid: 3240172dc5e11a644982dff8a1205c74, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7613248574530644219}
+    - target: {fileID: 7566501545335982608, guid: 3240172dc5e11a644982dff8a1205c74, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartScene
+      objectReference: {fileID: 0}
     - target: {fileID: 7566501545335982609, guid: 3240172dc5e11a644982dff8a1205c74, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1825,7 +1833,7 @@ PrefabInstance:
     - target: {fileID: 2144890766456099347, guid: 06bbabdea2c61c4478a49eca70b1064b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1186324227}
+      objectReference: {fileID: 1224301660}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06bbabdea2c61c4478a49eca70b1064b, type: 3}
 --- !u!4 &2144890766029029885 stripped

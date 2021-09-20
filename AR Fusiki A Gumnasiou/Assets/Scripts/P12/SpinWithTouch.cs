@@ -56,6 +56,22 @@ public class SpinWithTouch : MonoBehaviour
         }
     }
 
+    void TurnOnLamp()
+    {
+        if (rotateSpeed <= 0)
+        {
+
+        }
+        else if (rotateSpeed > 200)
+        {
+            lamp.material = lampOnFull;
+        }
+        else
+        {
+            lamp.material = lampOn2;
+        }
+    }
+
     void CheckFinishTouch()
     {
         if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Ended)
@@ -85,19 +101,7 @@ public class SpinWithTouch : MonoBehaviour
         transform.localRotation= Quaternion.AngleAxis(angle, Vector3.down);
     }
 
-    void TurnOnLamp()
-    {   if(rotateSpeed<=0)
-        {
-
-        }else if (rotateSpeed > 200)
-        {
-            lamp.material = lampOnFull;
-        }
-        else
-        {
-            lamp.material = lampOn2;
-        }
-    }
+    
 
     void TurnOffLamp()
     {
