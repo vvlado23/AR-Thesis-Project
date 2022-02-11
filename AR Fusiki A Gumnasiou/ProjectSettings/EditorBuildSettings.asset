@@ -89,4 +89,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Peirama 12-1.unity
     guid: b13edec4087d6394ba4b3a46f98f9641
-  m_configObjects: {}
+  m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 1062c9d9529f4b34f9469c28b2b26cb6, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: af31893825aa3bb479db3b4efa2c868e, type: 2}
